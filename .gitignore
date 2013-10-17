@@ -1,3 +1,6 @@
 venv/*
+notes/*
+notes.txt
 *.pyc
+*#*
 

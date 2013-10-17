@@ -20,12 +20,12 @@ ship_string = '|-/\-|'
 
 ### FUNCTIONS ###
 
-def draw_screen(x_ship, bullets):
+def draw_screen(x_ship, bullets, x_bullets, y_bullets):
     """Given all current parameters, draw the screen."""
     os.system('clear')
     print("Terminal Invaders - press 'q' to quit")
     draw_ship(x_ship)
-    draw_bullets(bullets)
+    draw_bullets(bullets, x_bullets, y_bullets)
 
 def draw_ship(x_pos):
     y_spacing = '\n\n\n'
@@ -37,17 +37,26 @@ def draw_ship(x_pos):
     # Move cursor down, out of the way
     print("\n\n\n\n\n")
 
-def draw_bullet():
-    pass
+def draw_bullet(bullet, bullets, x_bullets, y_bullets):
+    index = bullets.index(bullet)
+    x_spacing = ''
+    for x in range(0, x_bullets[index]):
+        x_spacing += ' '
+    print(x_spacing + '|')
+    #print(x_bullets, x_bullets[index])
 
-def draw_bullets(bullets):
+def draw_bullets(bullets, x_bullets, y_bullets):
     """Loops through all bullets. Draws bullets, and removes any
     that have disappeared from the screen."""
     for bullet in bullets:
-        draw_bullet()
+        draw_bullet(bullet, bullets, x_bullets, y_bullets)
 
 
 ### MAIN GAME ###
+
+# These should be dynamic, from current size of window.
+game_width = 80
+game_height = 40
 
 x_ship = 0
 bullet_number = 0
@@ -78,12 +87,12 @@ while input != 'q':
     # Keep the ship in bounds.
     if x_ship < 0:
         x_ship = 0
-    elif x_ship > 120:
-        x_ship = 120
+    elif x_ship > game_width:
+        x_ship = game_width
 
     # Draw the screen, which needs the ship's current position,
     #  the list of bullets, 
-    draw_screen(x_ship, bullets)
+    draw_screen(x_ship, bullets, x_bullets, y_bullets)
 
     # Poll for input each time we pass through the loop.
     input = getch.getch()
