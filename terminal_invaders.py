@@ -27,9 +27,16 @@ os.system('clear')
 print("Terminal Invaders - press 'q' to quit")
 draw_ship(x_ship)
 
-input = getch.getch()
+input = 'y'
 while input != 'q':
     os.system('clear')
     print("Terminal Invaders - press 'q' to quit")
-    draw_ship(int(input))
+
+    if ord(input) == 67:
+        x_ship += 1
+    elif ord(input) == 68:
+        x_ship -= 1
+
+    draw_ship(x_ship)
+
     input = getch.getch()
